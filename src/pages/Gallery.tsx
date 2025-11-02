@@ -8,7 +8,7 @@ const categories = [
   { id: "acrowspan", name: "Acrow Spans" },
   { id: "centeredsheets", name: "Centered Sheets" },
   { id: "clamps", name: "Clamps" },
-//  { id: "galvanizedplanks", name: "Metal Planks" },
+  //  { id: "galvanizedplanks", name: "Metal Planks" },
   { id: "jackpipes", name: "Jack Pipes" },
   { id: "columnbox", name: "Column Box" },
   { id: "shattering", name: "Heavy Shattering" },
@@ -23,17 +23,111 @@ interface GalleryItem {
 
 const galleryItems: GalleryItem[] = [
   // Scaffolding
-  { id: "scaf1", category: "scaffolding", image: "/gallery/scaffolding/i1.png" },
-  { id: "scaf2", category: "scaffolding", image: "/gallery/scaffolding/i2.png" },
-  { id: "scaf3", category: "scaffolding", image: "/gallery/scaffolding/i3.png" },
-  { id: "scaf4", category: "scaffolding", image: "/gallery/scaffolding/i4.png" },
-  { id: "scaf5", category: "scaffolding", image: "/gallery/scaffolding/i5.png" },
-  { id: "scaf6", category: "scaffolding", image: "/gallery/scaffolding/i5.jpg" },
-  { id: "scaf7", category: "scaffolding", image: "/gallery/scaffolding/i6.jpg" },
-  { id: "scaf8", category: "scaffolding", image: "/gallery/scaffolding/i7.png" },
-  { id: "scaf9", category: "scaffolding", image: "/gallery/scaffolding/i8.png" },
-  { id: "scaf10", category: "scaffolding", image: "/gallery/scaffolding/i9.png" },
-  { id: "scaf11", category: "scaffolding", image: "/gallery/scaffolding/i10.png" },
+  {
+    id: "scaf1",
+    category: "scaffolding",
+    image: "/gallery/scaffolding/i1.jpg",
+  },
+  {
+    id: "scaf2",
+    category: "scaffolding",
+    image: "/gallery/scaffolding/i1.png",
+  },
+  {
+    id: "scaf3",
+    category: "scaffolding",
+    image: "/gallery/scaffolding/i2.jpg",
+  },
+  {
+    id: "scaf4",
+    category: "scaffolding",
+    image: "/gallery/scaffolding/i2.png",
+  },
+  {
+    id: "scaf5",
+    category: "scaffolding",
+    image: "/gallery/scaffolding/i3.jpg",
+  },
+  {
+    id: "scaf6",
+    category: "scaffolding",
+    image: "/gallery/scaffolding/i3.png",
+  },
+  {
+    id: "scaf7",
+    category: "scaffolding",
+    image: "/gallery/scaffolding/i4.jpg",
+  },
+  {
+    id: "scaf8",
+    category: "scaffolding",
+    image: "/gallery/scaffolding/i4.png",
+  },
+  {
+    id: "scaf9",
+    category: "scaffolding",
+    image: "/gallery/scaffolding/i5.jpg",
+  },
+  {
+    id: "scaf10",
+    category: "scaffolding",
+    image: "/gallery/scaffolding/i5.png",
+  },
+  {
+    id: "scaf11",
+    category: "scaffolding",
+    image: "/gallery/scaffolding/i6.jpg",
+  },
+  {
+    id: "scaf12",
+    category: "scaffolding",
+    image: "/gallery/scaffolding/i6.png",
+  },
+  {
+    id: "scaf13",
+    category: "scaffolding",
+    image: "/gallery/scaffolding/i7.jpg",
+  },
+  {
+    id: "scaf14",
+    category: "scaffolding",
+    image: "/gallery/scaffolding/i7.png",
+  },
+  {
+    id: "scaf15",
+    category: "scaffolding",
+    image: "/gallery/scaffolding/i8.jpg",
+  },
+  {
+    id: "scaf16",
+    category: "scaffolding",
+    image: "/gallery/scaffolding/i8.png",
+  },
+  {
+    id: "scaf17",
+    category: "scaffolding",
+    image: "/gallery/scaffolding/i9.jpg",
+  },
+  {
+    id: "scaf18",
+    category: "scaffolding",
+    image: "/gallery/scaffolding/i9.png",
+  },
+  {
+    id: "scaf19",
+    category: "scaffolding",
+    image: "/gallery/scaffolding/i10.jpg",
+  },
+  {
+    id: "scaf20",
+    category: "scaffolding",
+    image: "/gallery/scaffolding/i10.png",
+  },
+  {
+    id: "scaf21",
+    category: "scaffolding",
+    image: "/gallery/scaffolding/i11.jpg",
+  },
 
   // Acrowspan
   { id: "acrow1", category: "acrowspan", image: "/gallery/acrowspan/i1.png" },
@@ -42,9 +136,21 @@ const galleryItems: GalleryItem[] = [
   { id: "acrow4", category: "acrowspan", image: "/gallery/acrowspan/i4.png" },
 
   // Centered Sheets
-  { id: "cs1", category: "centeredsheets", image: "/gallery/centeredsheets/i1.png" },
-  { id: "cs2", category: "centeredsheets", image: "/gallery/centeredsheets/i2.png" },
-  { id: "cs3", category: "centeredsheets", image: "/gallery/centeredsheets/i3.png" },
+  {
+    id: "cs1",
+    category: "centeredsheets",
+    image: "/gallery/centeredsheets/i1.png",
+  },
+  {
+    id: "cs2",
+    category: "centeredsheets",
+    image: "/gallery/centeredsheets/i2.png",
+  },
+  {
+    id: "cs3",
+    category: "centeredsheets",
+    image: "/gallery/centeredsheets/i3.png",
+  },
 
   // Clamps
   { id: "cl1", category: "clamps", image: "/gallery/clamps/i1.jpg" },
@@ -60,8 +166,16 @@ const galleryItems: GalleryItem[] = [
   { id: "cl11", category: "clamps", image: "/gallery/clamps/i11.jpg" },
 
   // Metal Planks
-  { id: "gp1", category: "galvanizedplanks", image: "/gallery/galvanizedplanks/i1.png" },
-  { id: "gp2", category: "galvanizedplanks", image: "/gallery/galvanizedplanks/i2.png" },
+  {
+    id: "gp1",
+    category: "galvanizedplanks",
+    image: "/gallery/galvanizedplanks/i1.png",
+  },
+  {
+    id: "gp2",
+    category: "galvanizedplanks",
+    image: "/gallery/galvanizedplanks/i2.png",
+  },
 
   // Jack Pipes
 
