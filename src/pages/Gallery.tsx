@@ -90,7 +90,7 @@ const galleryItems: GalleryItem[] = [
   { id: "hs2", category: "shattering", image: "/gallery/shattering/i2.jpg" },
 ];
 
-const Gallery = () => {
+export default function Gallery() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
 
@@ -100,28 +100,30 @@ const Gallery = () => {
       : galleryItems.filter((item) => item.category === selectedCategory);
 
   return (
-    <section id="gallery" className="py-20 bg-gradient-to-b from-gray-50 to-gray-200">
+    <section id="gallery" className="py-20 bg-white scroll-mt-16">
       <div className="container mx-auto px-4">
-        {/* Heading */}
-        <div className="text-center mb-12 animate-slide-up">
-          <h2 className="text-4xl md:text-5xl font-bold mb-3 text-gray-800">
-            Our Projects
+        {/* ✅ Section Header */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#1E3A4C] mb-3">
+            Project Gallery
           </h2>
-          <p className="text-lg text-gray-600 font-['Inter']">
-            Showcasing our expertise in scaffolding and structural works
+          <p className="text-lg text-[#333333]/80 max-w-2xl mx-auto">
+            Explore our range of scaffolding, centering, and support systems
+            used in top construction projects.
           </p>
         </div>
 
-        {/* Category Filters */}
+        {/* ✅ Filter Buttons */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.id)}
-              className={`px-4 py-2 rounded-md text-sm md:text-base font-semibold transition-all duration-300 ${
+              className={`px-5 py-2.5 rounded-full font-medium text-sm md:text-base border transition-all duration-300 
+              ${
                 selectedCategory === cat.id
-                  ? "bg-orange-500 text-white shadow-lg shadow-orange-300"
-                  : "bg-white text-gray-800 border border-gray-300 hover:bg-orange-100"
+                  ? "bg-[#1E3A4C] text-white border-[#1E3A4C] shadow-md scale-105"
+                  : "bg-white text-[#333333] border-gray-300 hover:bg-[#1E3A4C]/10 hover:border-[#1E3A4C]"
               }`}
             >
               {cat.name}
@@ -129,57 +131,52 @@ const Gallery = () => {
           ))}
         </div>
 
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredItems.map((item, index) => (
+        {/* ✅ Gallery Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredItems.map((item) => (
             <div
               key={item.id}
-              className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-500 cursor-pointer bg-white"
-              style={{ animationDelay: `${index * 0.05}s` }}
               onClick={() => setLightboxImage(item.image)}
+              className="group relative overflow-hidden rounded-xl bg-white shadow-md hover:shadow-xl cursor-pointer transition-all"
             >
               <img
                 src={item.image}
                 alt={item.category}
                 loading="lazy"
-                decoding="async"
-                className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-700"
+                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-700/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 pointer-events-none">
-                <p className="text-orange-400 text-sm font-semibold font-['Inter']">
+              <div className="absolute inset-0 bg-[#1E3A4C]/85 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center text-center">
+                <p className="text-white font-semibold text-lg">
                   {categories.find((c) => c.id === item.category)?.name}
                 </p>
+                <span className="mt-1 text-sm text-[#FFFFFF]/80">
+                  View Project
+                </span>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Lightbox */}
+      {/* ✅ Lightbox */}
       {lightboxImage && (
         <div
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
           onClick={() => setLightboxImage(null)}
         >
           <button
-            className="absolute top-4 right-4 text-white hover:text-orange-400 transition-colors"
-            onClick={(e) => {
-              e.stopPropagation();
-              setLightboxImage(null);
-            }}
-            aria-label="Close lightbox"
+            className="absolute top-5 right-5 text-white hover:text-[#1E3A4C] transition-colors"
+            onClick={() => setLightboxImage(null)}
           >
             <X size={36} />
           </button>
           <img
             src={lightboxImage}
             alt="Preview"
-            className="max-w-full max-h-full object-contain rounded-lg shadow-lg shadow-gray-700"
+            className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl border-4 border-[#1E3A4C]/30"
           />
         </div>
       )}
     </section>
   );
-};
-
-export default Gallery;
+}

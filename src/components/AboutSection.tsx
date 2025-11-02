@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import { Target, Eye, Award } from 'lucide-react';
+import { useEffect, useRef, useState } from "react";
+import { Target, Eye, Award } from "lucide-react";
 
 export default function AboutSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -7,123 +7,168 @@ export default function AboutSection() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
+      ([entry]) => setIsVisible(entry.isIntersecting),
       { threshold: 0.1 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <section id="about" className="py-20 bg-white" ref={sectionRef}>
-      <div className="container mx-auto px-4">
-        <div className={`text-center mb-12 section-animate ${isVisible ? 'visible' : ''}`}>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">About Us</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Your trusted partner in construction materials since our inception.
+    <section
+      id="about"
+      ref={sectionRef}
+      className="py-20 bg-[#FFFFFF] flex justify-center items-center"
+    >
+      <div className="container mx-auto px-6 md:px-10 flex flex-col items-center">
+        {/* ✅ Header */}
+        <div
+          className={`text-center mb-14 transition-all duration-700 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-[#1E3A4C] mb-3">
+            About Us
+          </h2>
+          <p className="text-lg text-[#333333]/80 max-w-2xl mx-auto leading-relaxed">
+            KK Steels & Scaffolding – Your trusted partner in durable
+            construction materials and scaffolding solutions.
           </p>
         </div>
 
-        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16 section-animate ${isVisible ? 'visible' : ''}`}>
-          <div>
-            <h3 className="text-3xl font-bold text-gray-900 mb-6">Our Story</h3>
-            <div className="space-y-4 text-gray-700 leading-relaxed">
+        {/* ✅ Our Story */}
+        <div
+          className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20 w-full transition-all duration-700 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          <div className="text-center lg:text-left">
+            <h3 className="text-3xl font-bold text-[#1E3A4C] mb-6">Our Story</h3>
+            <div className="space-y-4 text-[#333333]/90 leading-relaxed max-w-xl mx-auto">
               <p>
-                NR Infra Steel stands as a leading manufacturer and supplier of high-quality steel scaffolding and centering materials in Hyderabad. Under the leadership of our proprietor, <span className="font-semibold text-gray-900">Nasarath Pasha</span>, we have built a reputation for excellence in the construction materials industry.
+                <span className="font-semibold text-[#1E3A4C]">
+                  KK Steels & Scaffolding
+                </span>{" "}
+                is a leading supplier of scaffolding, centering, and construction
+                materials across Telangana and Andhra Pradesh. Led by{" "}
+                <span className="font-semibold text-[#1E3A4C]">
+                  Shaik Abdul Hameed
+                </span>
+                , our company is known for reliability, quality, and timely
+                service in every project.
               </p>
               <p>
-                Our commitment to quality and reliability has made us the preferred choice for construction professionals across the region. We specialize in manufacturing a comprehensive range of products including centering plates, jack pipes, acrow spans, column boxes, scaffolding systems, and cup-lock systems.
+                We supply a wide range of materials — scaffolding systems, acrow
+                spans, jack pipes, clamps, column boxes, and centering sheets —
+                ensuring top-notch strength and durability.
               </p>
               <p>
-                At NR Infra Steel, we understand the critical role that quality materials play in construction projects. That is why we ensure every product meets the highest standards of durability, safety, and performance.
+                With our focus on customer satisfaction and innovation, we’ve
+                become a trusted name supporting contractors, builders, and
+                infrastructure developers.
               </p>
             </div>
           </div>
-          <div className="relative">
+
+          <div className="relative flex justify-center lg:justify-end">
             <img
-              src="https://images.pexels.com/photos/159306/construction-site-build-construction-work-159306.jpeg?auto=compress&cs=tinysrgb&w=1200"
-              alt="NR Infra Steel"
-              className="rounded-2xl shadow-2xl"
+              src="/gallery/scaffolding/i1.png"
+              alt="KK Steels & Scaffolding"
+              className="rounded-2xl shadow-2xl border border-[#1E3A4C]/10 w-full max-w-md object-cover"
             />
-            <div className="absolute -bottom-6 -left-6 bg-orange-500 text-white p-6 rounded-xl shadow-xl">
-              <p className="text-4xl font-bold">15+</p>
-              <p className="text-sm">Years of Excellence</p>
-            </div>
+        
           </div>
         </div>
 
-        <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 section-animate ${isVisible ? 'visible' : ''}`} style={{ transitionDelay: '0.2s' }}>
-          <div className="text-center p-8 bg-gray-50 rounded-xl">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-500 text-white rounded-full mb-4">
-              <Target className="w-8 h-8" />
+        {/* ✅ Mission / Vision / Values */}
+        <div
+          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-20 w-full max-w-6xl transition-all duration-700 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          {[
+            {
+              icon: <Target className="w-8 h-8" />,
+              title: "Our Mission",
+              desc: "To deliver durable, reliable, and affordable scaffolding solutions that ensure safety and quality in every project.",
+            },
+            {
+              icon: <Eye className="w-8 h-8" />,
+              title: "Our Vision",
+              desc: "To become the most trusted name in scaffolding and material supply, known for quality, service, and innovation.",
+            },
+            {
+              icon: <Award className="w-8 h-8" />,
+              title: "Our Values",
+              desc: "Integrity, quality, reliability, and customer-first service guide every decision we make.",
+            },
+          ].map((item, i) => (
+            <div
+              key={i}
+              className="text-center p-8 bg-[#F9FAFB] rounded-2xl shadow-sm hover:shadow-md transition-all"
+            >
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1E3A4C] text-white rounded-full mb-4">
+                {item.icon}
+              </div>
+              <h4 className="text-2xl font-semibold text-[#1E3A4C] mb-3">
+                {item.title}
+              </h4>
+              <p className="text-[#333333]/80">{item.desc}</p>
             </div>
-            <h4 className="text-2xl font-bold text-gray-900 mb-3">Our Mission</h4>
-            <p className="text-gray-600">
-              To be a trusted partner in building the future by supplying superior infra steel products that ensure safety, quality, and efficiency in every construction project.
-            </p>
-          </div>
-
-          <div className="text-center p-8 bg-gray-50 rounded-xl">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-500 text-white rounded-full mb-4">
-              <Eye className="w-8 h-8" />
-            </div>
-            <h4 className="text-2xl font-bold text-gray-900 mb-3">Our Vision</h4>
-            <p className="text-gray-600">
-              To become the most reliable and innovative supplier of construction materials, setting industry standards for quality and customer satisfaction.
-            </p>
-          </div>
-
-          <div className="text-center p-8 bg-gray-50 rounded-xl">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-500 text-white rounded-full mb-4">
-              <Award className="w-8 h-8" />
-            </div>
-            <h4 className="text-2xl font-bold text-gray-900 mb-3">Our Values</h4>
-            <p className="text-gray-600">
-              Quality, integrity, reliability, and customer satisfaction are at the core of everything we do. We are committed to excellence in every interaction.
-            </p>
-          </div>
+          ))}
         </div>
 
-        <div className={`max-w-4xl mx-auto section-animate ${isVisible ? 'visible' : ''}`} style={{ transitionDelay: '0.3s' }}>
-          <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">Why Choose NR Infra Steel?</h3>
+        {/* ✅ Why Choose Us */}
+        <div
+          className={`max-w-5xl mx-auto transition-all duration-700 text-center ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          <h3 className="text-3xl font-bold text-[#1E3A4C] mb-8">
+            Why Choose KK Steels & Scaffolding?
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-gray-50 p-6 rounded-xl">
-              <h4 className="text-xl font-semibold text-gray-900 mb-2">Premium Quality</h4>
-              <p className="text-gray-600">
-                All our products are manufactured using high-grade steel, ensuring durability and long-lasting performance.
-              </p>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-xl">
-              <h4 className="text-xl font-semibold text-gray-900 mb-2">Competitive Pricing</h4>
-              <p className="text-gray-600">
-                We offer the best value for your investment with transparent pricing and no hidden costs.
-              </p>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-xl">
-              <h4 className="text-xl font-semibold text-gray-900 mb-2">Expert Guidance</h4>
-              <p className="text-gray-600">
-                Our experienced team provides professional advice to help you choose the right products for your needs.
-              </p>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-xl">
-              <h4 className="text-xl font-semibold text-gray-900 mb-2">Timely Delivery</h4>
-              <p className="text-gray-600">
-                We understand project timelines and ensure prompt delivery to keep your construction on schedule.
-              </p>
-            </div>
+            {[
+              {
+                title: "Premium Quality",
+                desc: "Our materials are tested for strength and safety, ensuring long-lasting performance.",
+              },
+              {
+                title: "Competitive Pricing",
+                desc: "We provide value-driven pricing with no compromise on quality or reliability.",
+              },
+              {
+                title: "Expert Support",
+                desc: "Our experienced team assists you in choosing the right scaffolding and centering solutions.",
+              },
+              {
+                title: "On-Time Delivery",
+                desc: "We understand deadlines — our logistics ensure quick and dependable deliveries.",
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="bg-[#F9FAFB] p-6 rounded-xl shadow-sm hover:shadow-md transition-all text-left md:text-center"
+              >
+                <h4 className="text-xl font-semibold text-[#1E3A4C] mb-2">
+                  {item.title}
+                </h4>
+                <p className="text-[#333333]/80">{item.desc}</p>
+              </div>
+            ))}
           </div>
+        </div>
+
+        {/* ✅ Footer Info */}
+        <div className="text-center mt-16 text-[#333333]/80 text-sm">
+          <p>
+            <span className="font-semibold text-[#1E3A4C]">Owner:</span> Shaik
+            Abdul Hameed |{" "}
+            <span className="font-semibold text-[#1E3A4C]">GST No:</span>{" "}
+            36IMYPS8615B1ZA
+          </p>
+          <p>📞 9703207868 / 9966932004</p>
         </div>
       </div>
     </section>

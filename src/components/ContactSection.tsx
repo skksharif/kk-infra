@@ -11,29 +11,17 @@ export default function ContactSection() {
     message: '',
   });
 
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) setIsVisible(true);
+    }, { threshold: 0.1 });
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => sectionRef.current && observer.unobserve(sectionRef.current);
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -50,111 +38,117 @@ export default function ContactSection() {
         subject: '',
         message: '',
       });
-
       setTimeout(() => setSubmitStatus('idle'), 4000);
     }, 1200);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-b from-gray-50 to-gray-100" ref={sectionRef}>
-      <div className="container mx-auto px-4">
-        <div className={`text-center mb-12 section-animate ${isVisible ? 'visible' : ''}`}>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Contact Us</h2>
-          <p className="text-lg text-gray-600">
-            Get in touch with us for inquiries, quotes, or any questions about our products and services.
+    <section id="contact" ref={sectionRef} className="py-20 bg-[#F8FAFC]">
+      <div className="container mx-auto px-6">
+        {/* Section Heading */}
+        <div className={`text-center mb-14 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <h2 className="text-4xl md:text-5xl font-bold text-[#1E3A4C] mb-4">Contact Us</h2>
+          <p className="text-lg text-[#333333]/80">
+            Reach out for inquiries, quotes, or details about our scaffolding and construction materials.
           </p>
         </div>
 
+        {/* Main Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-          <div className={`section-animate ${isVisible ? 'visible' : ''}`}>
-            <h3 className="text-3xl font-bold text-gray-900 mb-8">Get In Touch</h3>
-            <div className="space-y-6">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-orange-500 text-white rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-2">Phone</h4>
-                  <a href="tel:9697786999" className="text-orange-500 hover:text-orange-600 font-semibold block">
-                    9697 786 999
-                  </a>
-                  <a href="tel:9912822924" className="text-orange-500 hover:text-orange-600 font-semibold block">
-                    9912 822 924
-                  </a>
-                </div>
-              </div>
+          {/* Contact Info */}
+          <div className="space-y-8">
+            <h3 className="text-3xl font-bold text-[#1E3A4C] mb-6">Get in Touch</h3>
 
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-orange-500 text-white rounded-lg flex items-center justify-center flex-shrink-0">
-                  <MessageCircle className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-2">WhatsApp</h4>
-                  <a
-                    href="https://wa.me/919697786999"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-orange-500 hover:text-orange-600 font-semibold"
-                  >
-                    Chat with Nasarath Pasha
-                  </a>
-                </div>
+            {/* Phone */}
+            <div className="flex items-start space-x-4">
+              <div className="w-12 h-12 bg-[#1E3A4C] text-white rounded-lg flex items-center justify-center">
+                <Phone className="w-6 h-6" />
               </div>
+              <div>
+                <h4 className="text-lg font-semibold text-[#333333]">Phone</h4>
+                <a href="tel:9703207868" className="text-[#1E3A4C] hover:text-sky-500 font-semibold block">
+                  9703207868
+                </a>
+                <a href="tel:9966932004" className="text-[#1E3A4C] hover:text-sky-500 font-semibold block">
+                  9966932004
+                </a>
+              </div>
+            </div>
 
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-orange-500 text-white rounded-lg flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-2">Address</h4>
-                  <p className="text-gray-600">
-                    SC Complex, Shop No.3<br />
-                    Bholakpur, Musheerabad<br />
-                    Hyderabad, Telangana - 500020<br />
-                    India
-                  </p>
-                  <a
-                    href="https://www.google.com/maps/search/?api=1&query=17.421556,78.497667"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-orange-500 hover:text-orange-600 font-semibold inline-flex items-center mt-2"
-                  >
-                    <MapPin className="w-4 h-4 mr-1" />
-                    View on Google Maps
-                  </a>
-                </div>
+            {/* WhatsApp */}
+            <div className="flex items-start space-x-4">
+              <div className="w-12 h-12 bg-[#1E3A4C] text-white rounded-lg flex items-center justify-center">
+                <MessageCircle className="w-6 h-6" />
               </div>
+              <div>
+                <h4 className="text-lg font-semibold text-[#333333]">WhatsApp</h4>
+                <a
+                  href="https://wa.me/919703207868"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#1E3A4C] hover:text-sky-500 font-semibold"
+                >
+                  Chat with Shaik Abdul Hameed
+                </a>
+              </div>
+            </div>
 
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-orange-500 text-white rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Clock className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-2">Business Hours</h4>
-                  <p className="text-gray-600">
-                    Monday - Saturday: 9:00 AM - 7:00 PM<br />
-                    Sunday: By Appointment
-                  </p>
-                </div>
+            {/* Address */}
+            <div className="flex items-start space-x-4">
+              <div className="w-12 h-12 bg-[#1E3A4C] text-white rounded-lg flex items-center justify-center">
+                <MapPin className="w-6 h-6" />
               </div>
+              <div>
+                <h4 className="text-lg font-semibold text-[#333333]">Address</h4>
+                <p className="text-[#333333]/80">
+                  SC Complex, Shop No.3, Bholakpur, Musheerabad<br />
+                  Hyderabad, Telangana - 500020, India
+                </p>
+                <a
+                  href="https://www.google.com/maps?q=17.417673,78.497447"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#1E3A4C] hover:text-sky-500 font-semibold inline-flex items-center mt-2"
+                >
+                  <MapPin className="w-4 h-4 mr-1" />
+                  View on Google Maps
+                </a>
+              </div>
+            </div>
+
+            {/* Business Hours */}
+            <div className="flex items-start space-x-4">
+              <div className="w-12 h-12 bg-[#1E3A4C] text-white rounded-lg flex items-center justify-center">
+                <Clock className="w-6 h-6" />
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold text-[#333333]">Business Hours</h4>
+                <p className="text-[#333333]/80">
+                  Monday - Saturday: 9:00 AM - 7:00 PM<br />
+                  Sunday: By Appointment
+                </p>
+              </div>
+            </div>
+
+            {/* GST Info */}
+            <div className="pt-4 text-[#333333]/80 text-sm">
+              <p><strong>Owner:</strong> Shaik Abdul Hameed</p>
+              <p><strong>GST No:</strong> 36IMYPS8615B1ZA</p>
             </div>
           </div>
 
-          <div className={`section-animate ${isVisible ? 'visible' : ''}`} style={{ transitionDelay: '0.2s' }}>
-            <div className="bg-white rounded-2xl shadow-xl p-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Send Us An Inquiry</h3>
+          {/* Contact Form */}
+          <div>
+            <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
+              <h3 className="text-2xl font-bold text-[#1E3A4C] mb-6">Send Us an Inquiry</h3>
 
               {submitStatus === 'success' && (
-                <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                  <p className="text-green-800 font-semibold">Thank you for your inquiry!</p>
-                  <p className="text-green-700 text-sm mt-1">We will get back to you soon.</p>
+                <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-800 font-semibold">
+                  ✅ Thank you! We'll contact you soon.
                 </div>
               )}
 
@@ -167,7 +161,7 @@ export default function ContactSection() {
                   { label: 'Subject *', id: 'subject', type: 'text', required: true },
                 ].map((field) => (
                   <div key={field.id}>
-                    <label htmlFor={field.id} className="block text-sm font-semibold text-gray-700 mb-2">
+                    <label htmlFor={field.id} className="block text-sm font-semibold text-[#333333] mb-2">
                       {field.label}
                     </label>
                     <input
@@ -177,14 +171,13 @@ export default function ContactSection() {
                       required={field.required}
                       value={formData[field.id as keyof typeof formData]}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none transition-all"
-                      placeholder={`Enter your ${field.label.replace('*', '').trim().toLowerCase()}`}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1E3A4C] outline-none"
                     />
                   </div>
                 ))}
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label htmlFor="message" className="block text-sm font-semibold text-[#333333] mb-2">
                     Your Message *
                   </label>
                   <textarea
@@ -194,7 +187,7 @@ export default function ContactSection() {
                     value={formData.message}
                     onChange={handleChange}
                     rows={5}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none transition-all resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1E3A4C] outline-none resize-none"
                     placeholder="Please provide details about your inquiry..."
                   ></textarea>
                 </div>
@@ -202,25 +195,21 @@ export default function ContactSection() {
                 <button
                   type="submit"
                   disabled={submitStatus === 'submitting'}
-                  className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-4 rounded-lg transition-all flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-[#1E3A4C] hover:bg-[#142836] text-white font-semibold py-4 rounded-lg transition-all flex items-center justify-center gap-2"
                 >
-                  {submitStatus === 'submitting' ? (
-                    <span>Submitting...</span>
-                  ) : (
-                    <>
-                      <span>Submit Inquiry</span>
-                      <Send className="w-5 h-5" />
-                    </>
-                  )}
+                  {submitStatus === 'submitting' ? 'Submitting...' : <>
+                    Submit Inquiry <Send className="w-5 h-5" />
+                  </>}
                 </button>
               </form>
             </div>
           </div>
         </div>
 
-        <div className={`w-full h-[500px] rounded-2xl overflow-hidden shadow-xl section-animate ${isVisible ? 'visible' : ''}`} style={{ transitionDelay: '0.3s' }}>
+        {/* Map */}
+        <div className="w-full h-[450px] rounded-2xl overflow-hidden shadow-xl border border-gray-200">
           <iframe
-            src="https://www.google.com/maps?q=17.421556,78.497667&hl=en&z=16&output=embed"
+            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3806.8773420620305!2d78.49744797516561!3d17.41767308347466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTfCsDI1JzAzLjYiTiA3OMKwMzAnMDAuMSJF!5e0!3m2!1sen!2sin!4v1762075871662!5m2!1sen!2sin"
             width="100%"
             height="100%"
             style={{ border: 0 }}

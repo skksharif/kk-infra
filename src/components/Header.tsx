@@ -23,26 +23,31 @@ export default function Header({ activeSection }: HeaderProps) {
       const elementPosition = element.offsetTop - offset;
       window.scrollTo({
         top: elementPosition,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
       setMobileMenuOpen(false);
     }
   };
 
   return (
-    <header className="bg-[#2c2c2c] text-white shadow-lg sticky top-0 z-50">
+    <header className="bg-white text-[#333333] shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-4">
-          <div className="flex items-center space-x-3 cursor-pointer" onClick={() => scrollToSection('home')}>
-            <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-               <img src="/logo.png" alt="logo" className='w-11' />
+          {/* Logo and Title */}
+          <div
+            className="flex items-center space-x-3 cursor-pointer"
+            onClick={() => scrollToSection('home')}
+          >
+            <div className="w-12 h-12 bg-[#1E3A4C] rounded-lg flex items-center justify-center">
+              <img src="/logo.png" alt="logo" className="w-11" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold">NR Infra Steel</h1>
-              <p className="text-xs text-orange-400">Building The Future</p>
+              <h1 className="text-2xl font-bold text-[#1E3A4C]">KK Steels & Scaffolding</h1>
+              <p className="text-xs text-[#333333] opacity-70">Building The Future</p>
             </div>
           </div>
 
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             {navItems.map((item) => (
               <a
@@ -52,8 +57,10 @@ export default function Header({ activeSection }: HeaderProps) {
                   e.preventDefault();
                   scrollToSection(item.id);
                 }}
-                className={`hover:text-orange-500 transition-colors ${
-                  activeSection === item.id ? 'text-orange-500 font-semibold' : ''
+                className={`transition-colors hover:text-[#1E3A4C] ${
+                  activeSection === item.id
+                    ? 'text-[#1E3A4C] font-semibold'
+                    : 'text-[#333333]'
                 }`}
               >
                 {item.label}
@@ -61,22 +68,25 @@ export default function Header({ activeSection }: HeaderProps) {
             ))}
           </nav>
 
+          {/* Contact Button */}
           <a
-            href="tel:9697786999"
-            className="hidden md:flex items-center space-x-2 bg-orange-500 hover:bg-orange-600 px-4 py-2 rounded-lg transition-colors"
+            href="tel:9703207868"
+            className="hidden md:flex items-center space-x-2 bg-[#1E3A4C] hover:bg-[#162C3A] text-white px-4 py-2 rounded-lg transition-colors"
           >
             <Phone size={18} />
-            <span>9697 786 999</span>
+            <span>9703 207 868</span>
           </a>
 
+          {/* Mobile Menu Button */}
           <button
-            className="md:hidden"
+            className="md:hidden text-[#1E3A4C]"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
 
+        {/* Mobile Menu */}
         {mobileMenuOpen && (
           <nav className="md:hidden pb-4 space-y-3">
             {navItems.map((item) => (
@@ -87,19 +97,21 @@ export default function Header({ activeSection }: HeaderProps) {
                   e.preventDefault();
                   scrollToSection(item.id);
                 }}
-                className={`block w-full text-left py-2 hover:text-orange-500 transition-colors ${
-                  activeSection === item.id ? 'text-orange-500 font-semibold' : ''
+                className={`block w-full text-left py-2 transition-colors ${
+                  activeSection === item.id
+                    ? 'text-[#1E3A4C] font-semibold'
+                    : 'text-[#333333] hover:text-[#1E3A4C]'
                 }`}
               >
                 {item.label}
               </a>
             ))}
             <a
-              href="tel:9697786999"
-              className="flex items-center space-x-2 text-orange-500 py-2"
+              href="tel:9703207868"
+              className="flex items-center space-x-2 text-[#1E3A4C] font-medium py-2"
             >
               <Phone size={18} />
-              <span>9697 786 999</span>
+              <span>9703 207 868</span>
             </a>
           </nav>
         )}
